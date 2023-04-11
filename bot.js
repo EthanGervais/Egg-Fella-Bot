@@ -59,7 +59,7 @@ client.on('messageCreate', message => {
       let queue = client.DisTube.getQueue(message);
       if (queue) {
         client.DisTube.stop(message);
-        message.channel.send('okay hehe');
+        message.channel.send('Have an egg-cellent day!');
       } else if (!queue) {
         return;
       }
