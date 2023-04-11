@@ -7,6 +7,7 @@ const { DisTube } = require('distube');
 
 // DisTube setup
 client.DisTube = new DisTube(client, {
+  leaveOnFinish: false,
   emitNewSongOnly: true,
   emitAddSongWhenCreatingQueue: false,
   emitAddListWhenCreatingQueue: false
