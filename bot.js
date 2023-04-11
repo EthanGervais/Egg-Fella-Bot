@@ -4,12 +4,18 @@ const client = new discord.Client({
   intents: ['Guilds', 'GuildMessages', 'GuildVoiceStates', 'MessageContent']
 });
 const { DisTube } = require('distube');
+const { SpotifyPlugin } = require('@distube/spotify');
 
 // DisTube setup
 client.DisTube = new DisTube(client, {
   emitNewSongOnly: true,
   emitAddSongWhenCreatingQueue: false,
-  emitAddListWhenCreatingQueue: false
+  emitAddListWhenCreatingQueue: false,
+  plugins: [
+    new SpotifyPlugin({
+      emitEventsAfterFetching: true
+    })
+  ]
 });
 
 client.on('ready', () => {
@@ -66,11 +72,17 @@ client.on('messageCreate', message => {
           'You must be in a voice channel to use this command!'
         );
 
-      client.DisTube.skip(message);
+      let queue = client.DisTube.getQueue(message);
+      if (!queue)
+        return message.channel.send('There is nothing currently in the queue');
+
+      queue.songs.length == 1
+        ? client.DisTube.stop(message)
+        : queue.skip(message);
     }
 
     // Command to view the QUEUE
-    if (command == 'queue') {
+    if (command === 'queue') {
       let queue = client.DisTube.getQueue(message);
       if (!queue)
         return message.channel.send('There is nothing currently in the queue');
@@ -84,10 +96,20 @@ client.on('messageCreate', message => {
                   song.formattedDuration
                 }`
             )
-            .slice(0, 10)
+            .slice(0, 11)
             .join('\n') +
+          `\n\nTotal songs in queue: ${queue.songs.length} (${queue.formattedDuration})` +
           '```'
       );
+    }
+
+    if (command === 'shuffle') {
+      let queue = client.DisTube.getQueue(message);
+      if (!queue)
+        return message.channel.send('There is nothing currently in the queue');
+
+      queue.shuffle();
+      message.channel.send('The songs in the queue have been shuffled!');
     }
   } catch (err) {
     console.log(err);
