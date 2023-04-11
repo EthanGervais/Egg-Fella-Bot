@@ -5,9 +5,7 @@
     "discord.js": "^14.9.0",
     "distube": "^4.0.4",
     "dotenv": "^16.0.3",
-    "ffmpeg-static": "^4.4.1",
-    "libsodium-wrappers": "^0.7.11",
-    "opusscript": "^0.0.8"
+    "libsodium-wrappers": "^0.7.11"
   },
   "engines": {
     "node": "18.15.0"
