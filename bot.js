@@ -25,7 +25,7 @@ client.on('ready', () => {
 });
 
 // Regular message replies
-client.on('messageCreate', message => {
+client.on('messageCreate', async message => {
   try {
     if (message.author.bot || !message.guild) return;
 
@@ -70,7 +70,7 @@ client.on('messageCreate', message => {
           `Attempting to queue request the goofy Marcel request "${marcelRequests[randomChoice]}" in ${message.guild.name}`
         );
 
-        client.DisTube.play(
+        await client.DisTube.play(
           message.member.voice.channel,
           marcelRequests[randomChoice],
           {
@@ -88,7 +88,7 @@ client.on('messageCreate', message => {
           `Attempting to play request "${request}" in ${message.guild.name}`
         );
 
-        client.DisTube.play(message.member.voice.channel, request, {
+        await client.DisTube.play(message.member.voice.channel, request, {
           member: message.member,
           textChannel: message.channel,
           message
