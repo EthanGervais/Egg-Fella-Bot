@@ -6,6 +6,8 @@ const client = new discord.Client({
 const { DisTube } = require('distube');
 const { SpotifyPlugin } = require('@distube/spotify');
 
+let marcelSwitch = false;
+
 // DisTube setup
 client.DisTube = new DisTube(client, {
   emitNewSongOnly: true,
@@ -26,6 +28,13 @@ client.on('ready', () => {
 client.on('messageCreate', message => {
   try {
     if (message.author.bot || !message.guild) return;
+
+    // Command to flip the Marcel switch
+    if (message.content.toLowerCase().includes('marcel')) {
+      marcelSwitch = !marcelSwitch;
+      console.log(`The Marcel switch has been set to ${marcelSwitch}`);
+    }
+
     const prefix = '-';
     if (!message.content.toLowerCase().startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -34,6 +43,7 @@ client.on('messageCreate', message => {
 
     // Command to PLAY music
     if (command === 'play' || command === 'sing') {
+      message.delete();
       if (!message.member.voice.channel) {
         return message.channel.send(
           'You must be in a voice channel to use this command!'
@@ -42,18 +52,48 @@ client.on('messageCreate', message => {
 
       if (request == null || request == '') return;
 
-      console.log(
-        `"Play" request from ${message.author.username}#${message.author.discriminator} (ID: ${message.author.id}) sent in server ${message.guild.name} (ID: ${message.guild.id})`
-      );
-      console.log(
-        `Attempting to play request "${request}" in ${message.guild.name}`
-      );
+      // Change Marcel's request to something else
+      if (message.author.id === '548539185007558666' && marcelSwitch) {
+        const marcelRequests = [
+          'never gonna give you up',
+          'gummy bear audio',
+          'barbie girl aqua audio',
+          'among us trap remix',
+          'friday rebecca black',
+          'minecraft style lyrics',
+          'https://www.youtube.com/watch?v=dSDBr0WjrwQ', // MrBeast reading bee movie script
+          'the hampsterdance song'
+        ];
+        const randomChoice = Math.floor(Math.random() * 8);
 
-      client.DisTube.play(message.member.voice.channel, request, {
-        member: message.member,
-        textChannel: message.channel,
-        message
-      });
+        console.log(
+          `Attempting to queue request the goofy Marcel request "${marcelRequests[randomChoice]}" in ${message.guild.name}`
+        );
+
+        client.DisTube.play(
+          message.member.voice.channel,
+          marcelRequests[randomChoice],
+          {
+            member: message.member,
+            textChannel: message.channel,
+            message
+          }
+        );
+      } else {
+        // Regular request logic
+        console.log(
+          `"Play" request from ${message.author.username}#${message.author.discriminator} (ID: ${message.author.id}) sent in server ${message.guild.name} (ID: ${message.guild.id})`
+        );
+        console.log(
+          `Attempting to play request "${request}" in ${message.guild.name}`
+        );
+
+        client.DisTube.play(message.member.voice.channel, request, {
+          member: message.member,
+          textChannel: message.channel,
+          message
+        });
+      }
     }
 
     // Command to STOP music
@@ -102,7 +142,11 @@ client.on('messageCreate', message => {
               (song, id) =>
                 `${id === 0 ? 'Singing:' : `${id}.`} ${song.name} - ${
                   song.formattedDuration
-                }`
+                } [requested by ${
+                  song.member.nickname == null
+                    ? song.user.username
+                    : song.member.nickname
+                }]`
             )
             .slice(0, 11)
             .join('\n') +
@@ -119,6 +163,12 @@ client.on('messageCreate', message => {
 
       queue.shuffle();
       message.channel.send('The songs in the queue have been shuffled!');
+    }
+
+    // Command to check the status of the Marcel switch
+    if (command === 'switchstatus') {
+      message.channel.send(`The switch is currently set to: ${marcelSwitch}`);
+      console.log(`The Marcel switch is currently set to: ${marcelSwitch}`);
     }
   } catch (err) {
     console.log(err);
