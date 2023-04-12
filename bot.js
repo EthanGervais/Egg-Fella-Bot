@@ -107,7 +107,7 @@ client.on('messageCreate', async message => {
       let queue = client.DisTube.getQueue(message);
       if (queue) {
         client.DisTube.stop(message);
-        message.channel.send('Have an egg-cellent day!');
+        message.channel.send('Have an egg-straordinary day!');
       } else if (!queue) {
         return;
       }
