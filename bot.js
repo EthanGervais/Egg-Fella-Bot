@@ -30,6 +30,7 @@ client.on('messageCreate', message => {
     if (!message.content.toLowerCase().startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
+    const request = args.join(' ');
 
     // Command to PLAY music
     if (command === 'play' || command === 'sing') {
@@ -39,9 +40,16 @@ client.on('messageCreate', message => {
         );
       }
 
-      if (args.join(' ') == null || args.join(' ') == '') return;
+      if (request == null || request == '') return;
 
-      client.DisTube.play(message.member.voice.channel, args.join(' '), {
+      console.log(
+        `"Play" request from ${message.author.username}#${message.author.discriminator} (ID: ${message.author.id}) sent in server ${message.guild.name} (ID: ${message.guild.id})`
+      );
+      console.log(
+        `Attempting to play request "${request}" in ${message.guild.name}`
+      );
+
+      client.DisTube.play(message.member.voice.channel, request, {
         member: message.member,
         textChannel: message.channel,
         message
@@ -103,6 +111,7 @@ client.on('messageCreate', message => {
       );
     }
 
+    // Command to SHUFFLE music
     if (command === 'shuffle') {
       let queue = client.DisTube.getQueue(message);
       if (!queue)
@@ -137,15 +146,30 @@ function addSongEmbed(name, url, user) {
 client.DisTube.on('initQueue', queue => {
   queue.volume = 100;
 })
-  .on('playSong', (queue, song) =>
+  .on('playSong', (queue, song) => {
     queue.textChannel.send({
       embeds: [playSongEmbed(song.name, song.url, song.user)]
-    })
-  )
-  .on('addSong', (queue, song) =>
+    });
+
+    console.log(
+      `Now playing "${song.name}" in ${song.member.guild.name} (ID: ${song.member.guild.id})`
+    );
+  })
+  .on('addSong', (queue, song) => {
     queue.textChannel.send({
       embeds: [addSongEmbed(song.name, song.url, song.user)]
-    })
-  );
+    });
+  });
+
+// Events for joining/leaving servers
+client
+  .on('guildCreate', guild => {
+    console.log(
+      `Joined new server: ${guild.name} (ID: ${guild.id}). This server has ${guild.memberCount} members!`
+    );
+  })
+  .on('guildDelete', guild => {
+    console.log(`Removed from server: ${guild.name} (ID: ${guild.id})`);
+  });
 
 client.login(process.env.TOKEN);
