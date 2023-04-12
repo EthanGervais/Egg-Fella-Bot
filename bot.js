@@ -85,7 +85,7 @@ client.on('messageCreate', async message => {
           `"Play" request from ${message.author.username}#${message.author.discriminator} (ID: ${message.author.id}) sent in server ${message.guild.name} (ID: ${message.guild.id})`
         );
         console.log(
-          `Attempting to play request "${request}" in ${message.guild.name}`
+          `Attempting to queue request "${request}" in ${message.guild.name}`
         );
 
         await client.DisTube.play(message.member.voice.channel, request, {
