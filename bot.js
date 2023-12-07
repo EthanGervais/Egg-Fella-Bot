@@ -148,9 +148,7 @@ client.on('messageCreate', async message => {
       songs.splice(queueNum, 1, songs[songs.length - 1]);
       const replacedSong = songs.pop();
 
-      console.log(
-        `Replaced ${replacedSong.name} with ${songs[queueNum].name} in ${song.member.guild.name} (ID: ${song.member.guild.id}`
-      );
+      console.log(`Replaced ${replacedSong.name} with ${songs[queueNum].name}`);
     }
   } catch (err) {
     console.log(err);
