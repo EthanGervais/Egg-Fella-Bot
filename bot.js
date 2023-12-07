@@ -84,7 +84,7 @@ client.on('messageCreate', async message => {
 
       let queue = client.DisTube.getQueue(message);
       if (!queue)
-        return message.channel.send('There is nothing currently in the queue');
+        return message.channel.send('There is nothing currently in the queue.');
 
       queue.songs.length == 1
         ? client.DisTube.stop(message)
@@ -95,7 +95,7 @@ client.on('messageCreate', async message => {
     if (command === 'queue') {
       let queue = client.DisTube.getQueue(message);
       if (!queue)
-        return message.channel.send('There is nothing currently in the queue');
+        return message.channel.send('There is nothing currently in the queue.');
 
       message.channel.send(
         '```' +
@@ -121,10 +121,36 @@ client.on('messageCreate', async message => {
     if (command === 'shuffle') {
       let queue = client.DisTube.getQueue(message);
       if (!queue)
-        return message.channel.send('There is nothing currently in the queue');
+        return message.channel.send('There is nothing currently in the queue.');
 
       queue.shuffle();
       message.channel.send('The songs in the queue have been shuffled!');
+    }
+
+    if (command == 'replace') {
+      let queue = client.DisTube.getQueue(message);
+      if (!queue)
+        return message.channel.send('There is nothing currently in the queue.');
+
+      queueNum = request.slice(0, 1);
+      if (queueNum < 1 || queue.songs[queueNum] == null)
+        return message.channel.send(
+          'Please enter a valid queue number! Use the command `-queue` to see the current queue.'
+        );
+
+      replacement = request.slice(2);
+      await client.DisTube.play(message.member.voice.channel, replacement, {
+        member: message.member,
+        textChannel: message.channel,
+        message
+      });
+      const { songs } = queue;
+      songs.splice(queueNum, 1, songs[songs.length - 1]);
+      const replacedSong = songs.pop();
+
+      console.log(
+        `Replaced ${replacedSong.name} with ${songs[queueNum].name} in ${song.member.guild.name} (ID: ${song.member.guild.id}`
+      );
     }
   } catch (err) {
     console.log(err);
