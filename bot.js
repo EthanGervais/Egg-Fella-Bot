@@ -27,12 +27,6 @@ client.on('messageCreate', async message => {
   try {
     if (message.author.bot || !message.guild) return;
 
-    // Command to flip the Marcel switch
-    if (message.content.toLowerCase().includes('marcel')) {
-      marcelSwitch = !marcelSwitch;
-      console.log(`The Marcel switch has been set to ${marcelSwitch}`);
-    }
-
     const prefix = '-';
     if (!message.content.toLowerCase().startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -131,12 +125,6 @@ client.on('messageCreate', async message => {
 
       queue.shuffle();
       message.channel.send('The songs in the queue have been shuffled!');
-    }
-
-    // Command to check the status of the Marcel switch
-    if (command === 'switchstatus') {
-      message.channel.send(`The switch is currently set to: ${marcelSwitch}`);
-      console.log(`The Marcel switch is currently set to: ${marcelSwitch}`);
     }
   } catch (err) {
     console.log(err);
