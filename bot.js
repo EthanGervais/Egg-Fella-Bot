@@ -6,8 +6,6 @@ const client = new discord.Client({
 const { DisTube } = require('distube');
 const { SpotifyPlugin } = require('@distube/spotify');
 
-let marcelSwitch = false;
-
 // DisTube setup
 client.DisTube = new DisTube(client, {
   emitNewSongOnly: true,
@@ -52,48 +50,18 @@ client.on('messageCreate', async message => {
 
       if (request == null || request == '') return;
 
-      // Change Marcel's request to something else
-      if (message.author.id === '548539185007558666' && marcelSwitch) {
-        const marcelRequests = [
-          'never gonna give you up',
-          'gummy bear audio',
-          'barbie girl aqua audio',
-          'among us trap remix',
-          'friday rebecca black',
-          'minecraft style lyrics',
-          'https://www.youtube.com/watch?v=dSDBr0WjrwQ', // MrBeast reading bee movie script
-          'the hampsterdance song'
-        ];
-        const randomChoice = Math.floor(Math.random() * 8);
+      console.log(
+        `"Play" request from ${message.author.username}#${message.author.discriminator} (ID: ${message.author.id}) sent in server ${message.guild.name} (ID: ${message.guild.id})`
+      );
+      console.log(
+        `Attempting to queue request "${request}" in ${message.guild.name}`
+      );
 
-        console.log(
-          `Attempting to queue request the goofy Marcel request "${marcelRequests[randomChoice]}" in ${message.guild.name}`
-        );
-
-        await client.DisTube.play(
-          message.member.voice.channel,
-          marcelRequests[randomChoice],
-          {
-            member: message.member,
-            textChannel: message.channel,
-            message
-          }
-        );
-      } else {
-        // Regular request logic
-        console.log(
-          `"Play" request from ${message.author.username}#${message.author.discriminator} (ID: ${message.author.id}) sent in server ${message.guild.name} (ID: ${message.guild.id})`
-        );
-        console.log(
-          `Attempting to queue request "${request}" in ${message.guild.name}`
-        );
-
-        await client.DisTube.play(message.member.voice.channel, request, {
-          member: message.member,
-          textChannel: message.channel,
-          message
-        });
-      }
+      await client.DisTube.play(message.member.voice.channel, request, {
+        member: message.member,
+        textChannel: message.channel,
+        message
+      });
     }
 
     // Command to STOP music
