@@ -22,6 +22,8 @@ client.on('ready', () => {
   console.log(`${client.user.tag} is online!`);
 });
 
+let replaceFlag = false; // This variable needs to be global so it can be used in events.
+
 // Regular message replies
 client.on('messageCreate', async message => {
   try {
@@ -69,7 +71,6 @@ client.on('messageCreate', async message => {
       let queue = client.DisTube.getQueue(message);
       if (queue) {
         client.DisTube.stop(message);
-        message.channel.send('Have an egg-straordinary day!');
       } else if (!queue) {
         return;
       }
@@ -127,28 +128,35 @@ client.on('messageCreate', async message => {
       message.channel.send('The songs in the queue have been shuffled!');
     }
 
+    // Command to REPLACE a song in the queue
     if (command == 'replace') {
       let queue = client.DisTube.getQueue(message);
       if (!queue)
         return message.channel.send('There is nothing currently in the queue.');
 
-      queueNum = request.slice(0, 1);
-      if (queueNum < 1 || queue.songs[queueNum] == null)
+      const queueNum = parseFloat(request.split(' ', 1));
+      if (isNaN(queueNum) || queueNum < 1 || queue.songs[queueNum] == null)
         return message.channel.send(
           'Please enter a valid queue number! Use the command `-queue` to see the current queue.'
         );
 
-      replacement = request.slice(2);
+      let { songs } = queue;
+      const original = songs[queueNum];
+      const replacement = request.slice(2);
+      replaceFlag = true;
+
       await client.DisTube.play(message.member.voice.channel, replacement, {
         member: message.member,
         textChannel: message.channel,
+        position: queueNum,
         message
       });
-      const { songs } = queue;
-      songs.splice(queueNum, 1, songs[songs.length - 1]);
-      const replacedSong = songs.pop();
 
-      console.log(`Replaced ${replacedSong.name} with ${songs[queueNum].name}`);
+      songs.splice(queueNum + 1, 1);
+      queue.textChannel.send({
+        embeds: [replaceSongEmbed(original, songs[queueNum])]
+      });
+      replaceFlag = false;
     }
   } catch (err) {
     console.log(err);
@@ -164,11 +172,22 @@ function playSongEmbed(name, url, user) {
 }
 
 // Function to handle the embedded message when a song is added to the queue
-function addSongEmbed(name, url, user) {
+function addSongEmbed(name, url, user, queueNum) {
+  return new discord.EmbedBuilder().setColor('#6CBEED').setDescription(
+    `Warming up my vocal chords to sing [${name}](${url})
+      Current spot in the queue: ${queueNum} [${user}]`
+  );
+}
+
+// Function to handle the embedded message when a song in the queue is replaced with another
+function replaceSongEmbed(oldSong, newSong) {
   return new discord.EmbedBuilder()
     .setColor('#6CBEED')
+    .setTitle('Song Replaced Successfully')
     .setDescription(
-      `Warming up my vocal chords to sing [${name}](${url}) [${user}]`
+      `[${oldSong.name}](${oldSong.url})
+    has been replaced with
+    [${newSong.name}](${newSong.url})`
     );
 }
 
@@ -186,9 +205,16 @@ client.DisTube.on('initQueue', queue => {
     );
   })
   .on('addSong', (queue, song) => {
-    queue.textChannel.send({
-      embeds: [addSongEmbed(song.name, song.url, song.user)]
-    });
+    if (!replaceFlag) {
+      queue.textChannel.send({
+        embeds: [
+          addSongEmbed(song.name, song.url, song.user, queue.songs.length - 1)
+        ]
+      });
+    }
+  })
+  .on('disconnect', queue => {
+    queue.textChannel.send('Have an egg-straordinary day!');
   });
 
 // Events for joining/leaving servers
