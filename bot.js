@@ -22,7 +22,9 @@ client.on('ready', () => {
   console.log(`${client.user.tag} is online!`);
 });
 
-let replaceFlag = false; // This variable needs to be global so it can be used in events.
+// These variables needs to be global so it can be used in events
+let replaceFlag = false;
+let pushFlag = false;
 
 // Regular message replies
 client.on('messageCreate', async message => {
@@ -94,6 +96,11 @@ client.on('messageCreate', async message => {
 
     // Command to view the QUEUE
     if (command === 'queue') {
+      if (!message.member.voice.channel)
+        return message.channel.send(
+          'You must be in a voice channel to use this command!'
+        );
+
       let queue = client.DisTube.getQueue(message);
       if (!queue)
         return message.channel.send('There is nothing currently in the queue.');
@@ -120,6 +127,11 @@ client.on('messageCreate', async message => {
 
     // Command to SHUFFLE music
     if (command === 'shuffle') {
+      if (!message.member.voice.channel)
+        return message.channel.send(
+          'You must be in a voice channel to use this command!'
+        );
+
       let queue = client.DisTube.getQueue(message);
       if (!queue)
         return message.channel.send('There is nothing currently in the queue.');
@@ -130,6 +142,11 @@ client.on('messageCreate', async message => {
 
     // Command to REPLACE a song in the queue
     if (command == 'replace') {
+      if (!message.member.voice.channel)
+        return message.channel.send(
+          'You must be in a voice channel to use this command!'
+        );
+
       let queue = client.DisTube.getQueue(message);
       if (!queue)
         return message.channel.send('There is nothing currently in the queue.');
@@ -140,9 +157,10 @@ client.on('messageCreate', async message => {
           'Please enter a valid queue number! Use the command `-queue` to see the current queue.'
         );
 
+      const replacement = request.slice(2);
+      if (replacement == null || replacement == '') return;
       let { songs } = queue;
       const original = songs[queueNum];
-      const replacement = request.slice(2);
       replaceFlag = true;
 
       await client.DisTube.play(message.member.voice.channel, replacement, {
@@ -157,6 +175,31 @@ client.on('messageCreate', async message => {
         embeds: [replaceSongEmbed(original, songs[queueNum])]
       });
       replaceFlag = false;
+    }
+
+    if (command == 'push') {
+      if (!message.member.voice.channel)
+        return message.channel.send(
+          'You must be in a voice channel to use this command!'
+        );
+
+      if (request == null || request == '') return;
+
+      console.log(
+        `"Push" request from ${message.author.username}#${message.author.discriminator} (ID: ${message.author.id}) sent in server ${message.guild.name} (ID: ${message.guild.id})`
+      );
+      console.log(
+        `Attempting to queue request "${request}" in ${message.guild.name}`
+      );
+
+      pushFlag = true;
+      await client.DisTube.play(message.member.voice.channel, request, {
+        member: message.member,
+        textChannel: message.channel,
+        position: 1,
+        message
+      });
+      pushFlag = false;
     }
   } catch (err) {
     console.log(err);
@@ -191,6 +234,15 @@ function replaceSongEmbed(oldSong, newSong) {
     );
 }
 
+function pushSongEmbed(name, url, user) {
+  return new discord.EmbedBuilder()
+    .setTitle('Song pushed to top of queue')
+    .setColor('#6CBEED')
+    .setDescription(
+      `Warming up my vocal chords to sing [${name}](${url}) next [${user}]`
+    );
+}
+
 // Events for DisTube functions
 client.DisTube.on('initQueue', queue => {
   queue.volume = 100;
@@ -205,11 +257,15 @@ client.DisTube.on('initQueue', queue => {
     );
   })
   .on('addSong', (queue, song) => {
-    if (!replaceFlag) {
+    if (!replaceFlag && !pushFlag) {
       queue.textChannel.send({
         embeds: [
           addSongEmbed(song.name, song.url, song.user, queue.songs.length - 1)
         ]
+      });
+    } else if (pushFlag) {
+      queue.textChannel.send({
+        embeds: [pushSongEmbed(song.name, song.url, song.user)]
       });
     }
   })
