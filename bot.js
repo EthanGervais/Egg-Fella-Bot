@@ -172,7 +172,7 @@ client.on('messageCreate', async message => {
 
       songs.splice(queueNum + 1, 1);
       queue.textChannel.send({
-        embeds: [replaceSongEmbed(original, songs[queueNum])]
+        embeds: [replaceSongEmbed(original, songs[queueNum], message.member)]
       });
       replaceFlag = false;
     }
@@ -207,39 +207,66 @@ client.on('messageCreate', async message => {
 });
 
 // Function to handle the embedded message when a song is played
-function playSongEmbed(name, url, user) {
+function playSongEmbed(songName, passedUrl, user) {
   return new discord.EmbedBuilder()
-    .setColor('#6CBEED')
+    .setColor('#00adce')
     .setTitle('Now singing')
-    .setDescription(`[${name}](${url}) [${user}]`);
+    .setAuthor({
+      name: user.displayName,
+      url: passedUrl,
+      iconURL: user.displayAvatarURL()
+    })
+    .setDescription(`[${songName}](${passedUrl})`);
 }
 
 // Function to handle the embedded message when a song is added to the queue
-function addSongEmbed(name, url, user, queueNum) {
-  return new discord.EmbedBuilder().setColor('#6CBEED').setDescription(
-    `Warming up my vocal chords to sing [${name}](${url})
-      Current spot in the queue: ${queueNum} [${user}]`
-  );
+function addSongEmbed(songName, passedUrl, user, queueNum) {
+  return new discord.EmbedBuilder()
+    .setColor('#00c590')
+    .setAuthor({
+      name: user.displayName,
+      url: passedUrl,
+      iconURL: user.displayAvatarURL()
+    })
+    .setDescription(
+      `Warming up my vocal chords to sing [${songName}](${passedUrl})`
+    )
+    .setFooter({ text: `Current spot in the queue: ${queueNum}` });
 }
 
 // Function to handle the embedded message when a song in the queue is replaced with another
-function replaceSongEmbed(oldSong, newSong) {
+function replaceSongEmbed(oldSong, newSong, user) {
   return new discord.EmbedBuilder()
-    .setColor('#6CBEED')
+    .setColor('#8c65d3')
     .setTitle('Song Replaced Successfully')
-    .setDescription(
-      `[${oldSong.name}](${oldSong.url})
-    has been replaced with
-    [${newSong.name}](${newSong.url})`
+    .setAuthor({
+      name: user.displayName,
+      url: newSong.url,
+      iconURL: user.displayAvatarURL()
+    })
+    .addFields(
+      {
+        name: 'Replaced',
+        value: `[${oldSong.name}](${oldSong.url})`
+      },
+      {
+        name: 'with',
+        value: `[${newSong.name}](${newSong.url})`
+      }
     );
 }
 
-function pushSongEmbed(name, url, user) {
+function pushSongEmbed(songName, passedUrl, user) {
   return new discord.EmbedBuilder()
     .setTitle('Song pushed to top of queue')
-    .setColor('#6CBEED')
+    .setColor('#8c65d3')
+    .setAuthor({
+      name: user.displayName,
+      url: passedUrl,
+      iconURL: user.displayAvatarURL()
+    })
     .setDescription(
-      `Warming up my vocal chords to sing [${name}](${url}) next [${user}]`
+      `Warming up my vocal chords to sing [${songName}](${passedUrl}) next`
     );
 }
 
