@@ -12,7 +12,7 @@
     "opusscript": "^0.0.8"
   },
   "engines": {
-    "node": "18.17.0"
+    "node": "^18.17.0"
   },
   "name": "egg-fella-bot",
   "description": "A Discord bot made with DisTube.",
