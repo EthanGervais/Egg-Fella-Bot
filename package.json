@@ -4,6 +4,7 @@
     "@discordjs/voice": "^0.16.0",
     "@distube/spotify": "^1.5.1",
     "@distube/ytdl-core": "^4.13.4",
+    "@distube/ytsr": "^2.0.4",
     "discord.js": "^14.14.1",
     "distube": "^4.0.4",
     "dotenv": "^16.0.3",
