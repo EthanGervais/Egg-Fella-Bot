@@ -1,16 +1,18 @@
 {
   "dependencies": {
     "@discordjs/opus": "^0.9.0",
-    "@discordjs/voice": "^0.16.0",
-    "@distube/spotify": "^1.5.1",
+    "@discordjs/voice": "^0.16.1",
+    "@distube/spotify": "^2.0.1",
+    "@distube/youtube": "^1.0.4",
     "@distube/ytdl-core": "^4.16.0",
     "@distube/ytsr": "^2.0.4",
-    "discord.js": "^14.14.1",
-    "distube": "^4.0.4",
+    "discord.js": "^14.17.3",
+    "distube": "^5.0.4",
     "dotenv": "^16.0.3",
     "ffmpeg-static": "^4.4.1",
     "libsodium-wrappers": "^0.7.11",
-    "opusscript": "^0.0.8"
+    "opusscript": "^0.0.8",
+    "sodium-native": "^4.3.1"
   },
   "engines": {
     "node": "18.17.0"

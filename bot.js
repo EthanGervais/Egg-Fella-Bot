@@ -4,7 +4,9 @@ const client = new discord.Client({
   intents: ['Guilds', 'GuildMessages', 'GuildVoiceStates', 'MessageContent']
 });
 const { DisTube } = require('distube');
+const { YouTubePlugin } = require('@distube/youtube');
 const { SpotifyPlugin } = require('@distube/spotify');
+const fs = require('fs');
 
 // DisTube setup
 client.DisTube = new DisTube(client, {
@@ -12,8 +14,9 @@ client.DisTube = new DisTube(client, {
   emitAddSongWhenCreatingQueue: false,
   emitAddListWhenCreatingQueue: false,
   plugins: [
-    new SpotifyPlugin({
-      emitEventsAfterFetching: true
+    new SpotifyPlugin(),
+    new YouTubePlugin({
+      cookies: JSON.parse(fs.readFileSync('cookies.json'))
     })
   ]
 });
@@ -72,7 +75,8 @@ client.on('messageCreate', async message => {
 
       let queue = client.DisTube.getQueue(message);
       if (queue) {
-        client.DisTube.stop(message);
+        queue.stop(message);
+        queue.voice.leave();
       } else if (!queue) {
         return;
       }
@@ -89,9 +93,12 @@ client.on('messageCreate', async message => {
       if (!queue)
         return message.channel.send('There is nothing currently in the queue.');
 
-      queue.songs.length == 1
-        ? client.DisTube.stop(message)
-        : queue.skip(message);
+      if (queue.songs.length == 1) {
+        queue.stop(message);
+        queue.voice.leave();
+      } else {
+        queue.skip(message);
+      }
     }
 
     // Command to view the QUEUE
