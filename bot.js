@@ -25,7 +25,7 @@ client.on('ready', () => {
   console.log(`${client.user.tag} is online!`);
 });
 
-// These variables needs to be global so it can be used in events
+// These variables need to be global so they can be used in events
 let replaceFlag = false;
 let pushFlag = false;
 
@@ -319,7 +319,6 @@ client
   });
 
 // Attempting to log ffmpeg errors
-const Events = require('distube');
-client.DisTube.on(Events.FFMPEG_DEBUG, console.log);
+client.DisTube.on('ffmpegDebug', console.log);
 
 client.login(process.env.TOKEN);
