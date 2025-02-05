@@ -318,4 +318,8 @@ client
     console.log(`Removed from server: ${guild.name} (ID: ${guild.id})`);
   });
 
+// Attempting to log ffmpeg errors
+const Events = require('distube');
+client.DisTube.on(Events.FFMPEG_DEBUG, console.log);
+
 client.login(process.env.TOKEN);
