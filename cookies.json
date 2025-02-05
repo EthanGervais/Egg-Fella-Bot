@@ -29,7 +29,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1770330390.353461,
+    "expirationDate": 1770332110.880101,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-1PSIDCC",
@@ -38,12 +38,12 @@
     "secure": true,
     "session": false,
     "storeId": "1",
-    "value": "AKEyXzXwdJ4wKU9PYt7T09-Jmg1x9hF9Zy5Ujckvqb2NOygIsYFD88MM-4BAezMXM0l9fi7w",
+    "value": "AKEyXzWGU_k64E10JLo3Ts5nBKJtlC6ZKDVNVxtUrc6ViMmwpe7oEtjoVMGxvyGrvLVLr4GK",
     "id": 3
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1770330382.378505,
+    "expirationDate": 1770331591.28378,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-1PSIDTS",
@@ -52,7 +52,7 @@
     "secure": true,
     "session": false,
     "storeId": "1",
-    "value": "sidts-CjABmiPuTck6fsZtQWYnu40dUxg3XC1d9tzvtgl_CJVDnK_9L0aA6V6nQE9SEmPh9HEQAA",
+    "value": "sidts-CjABmiPuTfchYvu5FOQeFwB1ODEHp0fjRnFbBG3Xeb4eWXoPGP-Yv85F9h0e4pNCrUUQAA",
     "id": 4
   },
   {
@@ -85,7 +85,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1770330390.35348,
+    "expirationDate": 1770332110.880122,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-3PSIDCC",
@@ -94,12 +94,12 @@
     "secure": true,
     "session": false,
     "storeId": "1",
-    "value": "AKEyXzWf8haghKFa6oYen3kMXz8YjrusxOSdCwS83e6uhhzE3fMEx-jT9V6CVoVVcBGrrKsysA",
+    "value": "AKEyXzU9-f4R2vTJIbbnfteBK60UCE0m1Bz8DqaDaY5azgAPRo8TsLQzeX04C0Tc0lNCLQPcpw",
     "id": 7
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1770330382.378558,
+    "expirationDate": 1770331591.283846,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-3PSIDTS",
@@ -108,7 +108,7 @@
     "secure": true,
     "session": false,
     "storeId": "1",
-    "value": "sidts-CjABmiPuTck6fsZtQWYnu40dUxg3XC1d9tzvtgl_CJVDnK_9L0aA6V6nQE9SEmPh9HEQAA",
+    "value": "sidts-CjABmiPuTfchYvu5FOQeFwB1ODEHp0fjRnFbBG3Xeb4eWXoPGP-Yv85F9h0e4pNCrUUQAA",
     "id": 8
   },
   {
@@ -169,7 +169,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1773354384.820583,
+    "expirationDate": 1773356108.705275,
     "hostOnly": false,
     "httpOnly": false,
     "name": "PREF",
@@ -211,7 +211,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1770330390.353402,
+    "expirationDate": 1770332110.880048,
     "hostOnly": false,
     "httpOnly": false,
     "name": "SIDCC",
@@ -220,7 +220,7 @@
     "secure": false,
     "session": false,
     "storeId": "1",
-    "value": "AKEyXzVgnoKV9SH1fUjTAwme2b9p8MSqIYk2NT3HA3F-w_56BYowe1BcJd8azA0fpxRV8QyHwQ",
+    "value": "AKEyXzVz_DoksahoQ7uph8UyDZB1I7jjpFw8qcuRec5KCuZBseLroMxO9NiQhReZxlRDdW6zXQ",
     "id": 16
   },
   {
@@ -236,5 +236,33 @@
     "storeId": "1",
     "value": "Auriilji_80k4Z4Lz",
     "id": 17
+  },
+  {
+    "domain": ".youtube.com",
+    "expirationDate": 1738796113,
+    "hostOnly": false,
+    "httpOnly": false,
+    "name": "ST-tladcw",
+    "path": "/",
+    "sameSite": "unspecified",
+    "secure": false,
+    "session": false,
+    "storeId": "1",
+    "value": "session_logininfo=AFmmF2swRQIhAN0Ce-PGf9EQavNIllCJciX3fiqOm01fUB9B669rwr4oAiBOrBfTS0_tw21BG1ZnizxWKYtm9ORd2MmtbdRqi_MA7g%3AQUQ3MjNmeXFGaHJBUVRZM3NEejNubjBJbHdTcmlBczNmY0JFaW8xYnBJUDNBQXFQZHNUMUhVSV8xU2ZZX3lILVppbno0bVJZZ0NFOXJ3VXdoOTM0eW1EcmZCSXBMWDBURWZzRDFOWXlqVlJBd2IzZU51Mk1oY01LZV90Z090NjdzRGUzTFlwVzAwT3JjRzA1c3I2d3MzRVVBR0ZzN0Qya3pR",
+    "id": 18
+  },
+  {
+    "domain": ".youtube.com",
+    "expirationDate": 1738796113,
+    "hostOnly": false,
+    "httpOnly": false,
+    "name": "ST-xuwub9",
+    "path": "/",
+    "sameSite": "unspecified",
+    "secure": false,
+    "session": false,
+    "storeId": "1",
+    "value": "session_logininfo=AFmmF2swRQIhAN0Ce-PGf9EQavNIllCJciX3fiqOm01fUB9B669rwr4oAiBOrBfTS0_tw21BG1ZnizxWKYtm9ORd2MmtbdRqi_MA7g%3AQUQ3MjNmeXFGaHJBUVRZM3NEejNubjBJbHdTcmlBczNmY0JFaW8xYnBJUDNBQXFQZHNUMUhVSV8xU2ZZX3lILVppbno0bVJZZ0NFOXJ3VXdoOTM0eW1EcmZCSXBMWDBURWZzRDFOWXlqVlJBd2IzZU51Mk1oY01LZV90Z090NjdzRGUzTFlwVzAwT3JjRzA1c3I2d3MzRVVBR0ZzN0Qya3pR",
+    "id": 19
   }
 ]
