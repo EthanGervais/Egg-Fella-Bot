@@ -5,6 +5,7 @@ const client = new discord.Client({
 });
 const { DisTube } = require('distube');
 const { YouTubePlugin } = require('@distube/youtube');
+const { YtDlpPlugin } = require('@distube/yt-dlp');
 const { SpotifyPlugin } = require('@distube/spotify');
 const fs = require('fs');
 
@@ -17,6 +18,9 @@ client.DisTube = new DisTube(client, {
     new SpotifyPlugin(),
     new YouTubePlugin({
       cookies: JSON.parse(fs.readFileSync('cookies.json'))
+    }),
+    new YtDlpPlugin({
+      update: false
     })
   ]
 });
