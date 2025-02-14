@@ -1,11 +1,10 @@
 {
   "dependencies": {
-    "@discordjs/opus": "^0.9.0",
-    "@discordjs/voice": "^0.16.1",
+    "@discordjs/voice": "^0.18.0",
     "@distube/spotify": "^2.0.1",
     "@distube/youtube": "^1.0.4",
     "@distube/yt-dlp": "^2.0.1",
-    "@distube/ytdl-core": "^4.16.3",
+    "@distube/ytdl-core": "github:ToddyTheNoobDud/ytdl-core-stuff",
     "@distube/ytsr": "^2.0.4",
     "discord.js": "^14.17.3",
     "distube": "^5.0.4",
@@ -13,10 +12,10 @@
     "ffmpeg-static": "^4.4.1",
     "libsodium-wrappers": "^0.7.11",
     "opusscript": "^0.0.8",
-    "sodium-native": "^4.3.1"
+    "sodium-native": "^4.3.2"
   },
   "engines": {
-    "node": "18.17.0"
+    "node": "22.11.0"
   },
   "name": "egg-fella-bot",
   "description": "A Discord bot made with DisTube.",
