@@ -9,7 +9,6 @@
     "discord.js": "^14.17.3",
     "distube": "^5.0.4",
     "dotenv": "^16.0.3",
-    "ffmpeg-static": "^4.4.1",
     "libsodium-wrappers": "^0.7.11",
     "opusscript": "^0.0.8",
     "sodium-native": "^4.3.2"
