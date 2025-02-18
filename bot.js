@@ -17,7 +17,10 @@ client.DisTube = new DisTube(client, {
   plugins: [
     new SpotifyPlugin(),
     new YouTubePlugin({
-      cookies: JSON.parse(fs.readFileSync('./cookies.json'))
+      cookies: JSON.parse(fs.readFileSync('./cookies.json')),
+      ytdlOptions: {
+        playerClients: ['ANDROID']
+      }
     }),
     new YtDlpPlugin({
       update: false
