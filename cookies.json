@@ -14,7 +14,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1775753742.279138,
+    "expirationDate": 1775754946.312424,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-1PSIDTS",
@@ -23,7 +23,7 @@
     "secure": true,
     "session": false,
     "storeId": null,
-    "value": "sidts-CjIB7pHptRuNAu-VIBuk9gUeHeioley93dAwn_slL6QTpMt4yOEUFMNGlPVjflSIZnQ-ghAA"
+    "value": "sidts-CjIB7pHptefjMm5Ie8TYnPBwdYxuRGImRiscvgYKBXgIQ2rBgGXCIMl09nXUNjS6ItWrERAA"
   },
   {
     "domain": ".youtube.com",
@@ -40,7 +40,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1775753749.064761,
+    "expirationDate": 1775755129.979222,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-1PSIDCC",
@@ -49,7 +49,7 @@
     "secure": true,
     "session": false,
     "storeId": null,
-    "value": "AKEyXzVMljUeb3zEI1_J6SE4_FWdf2L6_LfCIzuKOGyueO7JbRcyd84xMzhv91_Acaf99gEvA8I"
+    "value": "AKEyXzX5piWZhJc9VYo7wM3pX7JWGPEkiu7evL9CuY0OxaP3l26YazfUfurSkHozCNj8aPMiRF4"
   },
   {
     "domain": ".youtube.com",
@@ -105,7 +105,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1775753749.064808,
+    "expirationDate": 1775755129.979268,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-3PSIDCC",
@@ -114,11 +114,11 @@
     "secure": true,
     "session": false,
     "storeId": null,
-    "value": "AKEyXzXUaib4fhbXQ_93tHVGfPSDk3jhgISys3xfTUHuAJCYho5VbdqdY93yfNDSJ0PGp5eBTg"
+    "value": "AKEyXzWGsBrnE1w5isJAtg58T2kwBh_MV6-I30vwQ8NcbKOiuIkBxcApEHG2j2UzmfuM4bDfQQ"
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1775753742.279218,
+    "expirationDate": 1775754946.312508,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-3PSIDTS",
@@ -127,7 +127,7 @@
     "secure": true,
     "session": false,
     "storeId": null,
-    "value": "sidts-CjIB7pHptRuNAu-VIBuk9gUeHeioley93dAwn_slL6QTpMt4yOEUFMNGlPVjflSIZnQ-ghAA"
+    "value": "sidts-CjIB7pHptefjMm5Ie8TYnPBwdYxuRGImRiscvgYKBXgIQ2rBgGXCIMl09nXUNjS6ItWrERAA"
   },
   {
     "domain": ".youtube.com",
@@ -144,7 +144,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1778777746.80776,
+    "expirationDate": 1778779121.838541,
     "hostOnly": false,
     "httpOnly": false,
     "name": "PREF",
